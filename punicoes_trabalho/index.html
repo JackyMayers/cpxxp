@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Punição Serviços - Complexo XP</title>
+  <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+    }
+    nav {
+      background: #1f1f1f;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      background-color: #1d1d1d;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+    header a {
+      color: #4fc3f7;
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #90caf9;
+    }
+    label {
+      margin: 8px 0 4px;
+      font-weight: bold;
+      display: block;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background-color: #2b2b2b;
+      color: #e0e0e0;
+      font-size: 14px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #4fc3f7;
+      background-color: #333;
+      outline: none;
+    }
+    button {
+      background-color: #3f51b5;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #303f9f;
+    }
+    textarea {
+      resize: none;
+      height: 250px;
+      font-family: monospace;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .hidden {
+      display: none;
+    }
+    .inline-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      .inline-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    /* Animações */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+      width: 100%;
+      max-width: 700px;
+    }
+    .footer a {
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+    .footer img {
+      margin-top: 10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">🏠 Início</a> |
+    <a href="../entrevista/index.html">Entrevista</a> |
+    <a href="../punicoes_trabalho/index.html">Punições Trabalho</a> |
+    <a href="../punicoes_nome/index.html">Punições Nome</a> |
+    <a href="../verificar_perfil/index.html">Verificar Perfil</a>
+  </nav>
+
+  <div class="container fade-in">
+    <header>
+      <p>Lembrem-se de alterar a mensagem para "Bom dia!", "Boa tarde!" ou "Boa noite!"</p>
+    </header>
+    <h1>Punições serviços XP</h1>
+
+    <label for="id">ID</label>
+    <input type="text" id="id" placeholder="ID" />
+
+    <label for="idDiscord">ID Discord</label>
+    <input type="text" id="idDiscord" placeholder="ID Discord" />
+
+    <label for="profissao">Profissão</label>
+    <select id="profissao" onchange="mostrarOpcoesAdicionais()">
+      <option value="Faxineiro">Faxineiro</option>
+      <option value="Lenhador">Lenhador</option>
+      <option value="Minerador">Minerador</option>
+      <option value="Motoboy">Motoboy</option>
+      <option value="Lixeiro">Lixeiro</option>
+      <option value="Caçador">Caçador</option>
+    </select>
+
+    <div id="opcoesLixeiro" class="hidden">
+      <label for="opcaoLixeiro">Tipo de advertência</label>
+      <select id="opcaoLixeiro" onchange="atualizarAdvertencia()">
+        <option value="Roupa">Roupa</option>
+        <option value="Veiculo">Veículo</option>
+        <option value="RoupaVeiculo">Roupa e Veículo</option>
+      </select>
+    </div>
+
+    <div id="opcoesCacador" class="hidden">
+      <label for="opcaoCacador">Tipo de advertência</label>
+      <select id="opcaoCacador" onchange="atualizarAdvertencia()">
+        <option value="Roupa">Roupa</option>
+        <option value="Arma">Arma</option>
+        <option value="RoupaArma">Roupa e Arma</option>
+      </select>
+    </div>
+
+    <label for="tipoAdvertencia">Tipo de Advertência</label>
+    <select id="tipoAdvertencia" onchange="mostrarCamposTipo2(); atualizarAdvertencia();">
+      <option value="1">Advertência 1</option>
+      <option value="2">Advertência 2</option>
+    </select>
+
+    <div id="dadosAdvertencia2" class="hidden">
+      <div class="inline-group">
+        <label for="tratamento">"O" ou "A"</label>
+        <select id="tratamento" onchange="atualizarAdvertencia()">
+          <option value="o">O</option>
+          <option value="a">A</option>
+        </select>
+        <label for="nomeStaff">Staff</label>
+        <input type="text" id="nomeStaff" placeholder="Nome da Staff" />
+      </div>
+      <label for="data1">Data 1</label>
+      <input type="text" id="data1" placeholder="ex: 0705 ou 07/05" />
+      <label for="data2">Data 2</label>
+      <input type="text" id="data2" placeholder="ex: 0805 ou 08/05" />
+    </div>
+
+    <button onclick="gerarRelatorio()">Gerar Relatório</button>
+
+    <label for="relatorio">Relatório</label>
+    <textarea id="relatorio" readonly></textarea>
+  </div>
+
+  <div class="footer fade-in">
+    <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Jacky Confuso" width="100" />
+    <p>2025 - Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank">Jacky Mayers</a>!</p>
+  </div>
+
+  <script>
+    function mostrarOpcoesAdicionais() {
+      const prof = document.getElementById('profissao').value;
+      document.getElementById('opcoesLixeiro').classList.toggle('hidden', prof !== 'Lixeiro');
+      document.getElementById('opcoesCacador').classList.toggle('hidden', prof !== 'Caçador');
+      atualizarAdvertencia();
+    }
+    function mostrarCamposTipo2() {
+      const tipo = document.getElementById('tipoAdvertencia').value;
+      document.getElementById('dadosAdvertencia2').classList.toggle('hidden', tipo !== '2');
+    }
+    function atualizarAdvertencia() {
+      const prof = document.getElementById('profissao').value;
+      let motivo = 'Roupa inadequada';
+      if (prof === 'Lixeiro') {
+        const op = document.getElementById('opcaoLixeiro').value;
+        if (op === 'Veiculo') motivo = 'Veículo inadequado';
+        else if (op === 'RoupaVeiculo') motivo = 'Roupa e veículo inadequados';
+      }
+      if (prof === 'Caçador') {
+        const op = document.getElementById('opcaoCacador').value;
+        if (op === 'Arma') motivo = 'Arma inadequada';
+        else if (op === 'RoupaArma') motivo = 'Roupa e arma inadequadas';
+      }
+      document.getElementById('relatorio').setAttribute('data-motivoResumo', motivo);
+    }
+    function gerarRelatorio() {
+      const id = document.getElementById('id').value;
+      const discord = document.getElementById('idDiscord').value;
+      const prof = document.getElementById('profissao').value;
+      const tipo = document.getElementById('tipoAdvertencia').value;
+      const motivo = document.getElementById('relatorio').getAttribute('data-motivoResumo') || 'Roupa inadequada';
+      const nomeStaff = document.getElementById('nomeStaff').value;
+      const tratamento = document.getElementById('tratamento').value;
+      const data1Input = document.getElementById('data1').value;
+      const data2Input = document.getElementById('data2').value;
+      const detalhes = {
+        Faxineiro: '(Faxineiro: calça, sapatos, camiseta e cinto com ferramentas).',
+        Lenhador: '(Lenhador: luvas, sapatos, camiseta e calça).',
+        Minerador: '(Minerador: luvas, sapatos, colete refletivo, capacete de segurança, calças e camiseta).',
+        Motoboy: '(Motoboy: colete de mototaxi, sapatos, bolsa de entregador, jaqueta e capacete).',
+        Lixeiro: {
+          Roupa: '(Lixeiro: sapato, luvas, colete refletivo, camiseta e calça).',
+          Veiculo: '(Lixeiro: caminhão trash).',
+          RoupaVeiculo: '(Lixeiro: sapato, luvas, colete refletivo, camiseta, calça e caminhão trash).'
+        },
+        Caçador: {
+          Roupa: '(Caçador: roupas fechadas (calças e camisas manga longa), luvas e sapatos).',
+          Arma: '(Caçador: rifle de caça).',
+          RoupaArma: '(Caçador: roupas fechadas (calças e camisas manga longa), luvas, sapatos e rifle de caça).'
+        }
+      };
+      let detalhe = detalhes[prof];
+      if (typeof detalhe === 'object') {
+        detalhe = detalhes[prof === 'Lixeiro' ? document.getElementById('opcaoLixeiro').value : document.getElementById('opcaoCacador').value];
+      }
+      let relatorio = `**ID:** ${id}\n**ID Discord:** ${discord} | <@${discord}>\n**Profissão:** ${prof}\n**Motivo da Advertência:** ${motivo} para realizar o trabalho de ${prof.toLowerCase()}\n**Status:** Advertência\n**Provas:**\n\n`;
+      if (tipo === '1') {
+        if (prof === 'Lixeiro') {
+          if (document.getElementById('opcaoLixeiro').value === 'Roupa') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Lixeiro.Roupa}`;
+          } else if (document.getElementById('opcaoLixeiro').value === 'Veiculo') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do veículo de trabalho. Lembre-se de que é essencial utilizar o veículo correto para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Lixeiro.Veiculo}`;
+          } else if (document.getElementById('opcaoLixeiro').value === 'RoupaVeiculo') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme e do veículo de trabalho. Lembre-se de que é essencial utilizar tanto a vestimenta quanto o veículo corretos para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Lixeiro.RoupaVeiculo}`;
+          }
+        } else if (prof === 'Caçador') {
+          if (document.getElementById('opcaoCacador').value === 'Roupa') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Caçador.Roupa}`;
+          } else if (document.getElementById('opcaoCacador').value === 'Arma') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do equipamento de trabalho. Lembre-se de que é essencial utilizar o equipamento correto para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Caçador.Arma}`;
+          } else if (document.getElementById('opcaoCacador').value === 'RoupaArma') {
+            relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme e do equipamento de trabalho. Lembre-se de que é essencial utilizar tanto a vestimenta quanto o equipamento corretos para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Caçador.RoupaArma}`;
+          }
+        } else if (prof === 'Faxineiro') {
+          relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Faxineiro}`;
+        } else if (prof === 'Lenhador') {
+          relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Lenhador}`;
+        } else if (prof === 'Minerador') {
+          relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Minerador}`;
+        } else if (prof === 'Motoboy') {
+          relatorio += `Boa tarde. Estamos registrando uma advertência pelo uso inadequado do uniforme de trabalho. Lembre-se de que é essencial utilizar a vestimenta correta para o serviço que está sendo realizado. Em caso de reincidência, uma punição entrará em vigor. ${detalhes.Motoboy}`;
+        }
+      } else {
+        const dataTexto = montarTextoData(data1Input, data2Input);
+        relatorio += `Boa Tarde, você está sendo convidado/a a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nomeStaff}, para agendar um horário no PRIVADO, ${dataTexto}. Motivo: ${motivo} para realizar o trabalho de ${prof.toLowerCase()}`;
+      }
+      document.getElementById('relatorio').value = relatorio;
+    }
+    function normalizarDataBr(str) {
+      const soNumeros = str.replace(/[^\d]/g, '');
+      const hoje = new Date();
+      const anoAtual = hoje.getFullYear();
+      if (soNumeros.length === 4) {
+        return new Date(`${anoAtual}-${soNumeros.slice(2, 4)}-${soNumeros.slice(0, 2)}T00:00:00`);
+      }
+      if (soNumeros.length === 8) {
+        return new Date(`${soNumeros.slice(4, 8)}-${soNumeros.slice(2, 4)}-${soNumeros.slice(0, 2)}T00:00:00`);
+      }
+      return null;
+    }
+    function montarTextoData(d1, d2) {
+      const hoje = new Date();
+      const amanha = new Date();
+      amanha.setDate(hoje.getDate() + 1);
+      const data1 = normalizarDataBr(d1);
+      const data2 = normalizarDataBr(d2);
+      const f1 = data1?.toLocaleDateString('pt-BR');
+      const f2 = data2?.toLocaleDateString('pt-BR');
+      if (!data1 || isNaN(data1)) return 'data inválida';
+      let texto = '';
+      const hojeF = hoje.toLocaleDateString('pt-BR');
+      const amanhaF = amanha.toLocaleDateString('pt-BR');
+      if (f1 === hojeF) texto += `na data de hoje (${f1})`;
+      else if (f1 === amanhaF) texto += `na data de amanhã (${f1})`;
+      else texto += `na data de (${f1})`;
+      if (data2 && !isNaN(data2)) {
+        if (f2 === amanhaF) texto += ` ou amanhã (${f2})`;
+        else texto += ` ou (${f2})`;
+      }
+      return texto;
+    }
+    // Inicia mostrando as opções certas quando carrega
+    mostrarOpcoesAdicionais();
+  </script>
+</body>
+</html>
