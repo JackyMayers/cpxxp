@@ -41,10 +41,23 @@
       margin-top: 12px;
       font-weight: 600;
     }
-    input[type="text"], input[type="date"] {
-      width: 100%;
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    select {
+      width: 60px;
       padding: 10px;
-      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      background-color: #333;
+      color: #f9f9f9;
+      font-size: 1rem;
+    }
+    input[type="text"], input[type="date"] {
+      flex: 1;
+      padding: 10px;
       border-radius: 8px;
       border: none;
       background-color: #333;
@@ -101,8 +114,14 @@
   <div class="container">
     <h1>Marcar Reunião</h1>
 
-    <label for="nomeStaff">Nome do administrador:</label>
-    <input type="text" id="nomeStaff" placeholder="Ex: Nome" />
+    <label>Nome do administrador:</label>
+    <div class="row">
+      <select id="tratamento">
+        <option value="o">o</option>
+        <option value="a">a</option>
+      </select>
+      <input type="text" id="nomeStaff" placeholder="Ex: Nome" />
+    </div>
 
     <label for="dataInicio">Data de início (opcional):</label>
     <input type="date" id="dataInicio" />
@@ -128,11 +147,12 @@
     }
 
     function gerarMensagem() {
+      const tratamento = document.getElementById('tratamento').value;
       const nome = document.getElementById('nomeStaff').value.trim() || 'Nome';
       const dataInicioVal = document.getElementById('dataInicio').value;
       const dataFimVal = document.getElementById('dataFim').value;
 
-      let mensagem = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure o ${nome}, para agendar um horário no PRIVADO, `;
+      let mensagem = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nome}, para agendar um horário no PRIVADO, `;
 
       const hoje = new Date();
       const amanha = new Date();
