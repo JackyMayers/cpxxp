@@ -16,7 +16,7 @@
     nav {
       margin-bottom: 25px;
       display: flex;
-      justify-content: center; /* centraliza o menu */
+      justify-content: center;
       flex-wrap: wrap;
       gap: 15px;
     }
@@ -102,10 +102,13 @@
     <h1>Marcar Reunião</h1>
 
     <label for="nomeStaff">Nome do administrador:</label>
-    <input type="text" id="nomeStaff" placeholder="Ex: Alexandre" />
+    <input type="text" id="nomeStaff" placeholder="Ex: Nome" />
 
-    <label for="dataReuniao">Data da reunião (opcional):</label>
-    <input type="date" id="dataReuniao" />
+    <label for="dataInicio">Data inicial (opcional):</label>
+    <input type="date" id="dataInicio" />
+
+    <label for="dataFim">Data final (opcional):</label>
+    <input type="date" id="dataFim" />
 
     <button class="generate" onclick="gerarMensagem()">Gerar Mensagem</button>
 
@@ -125,8 +128,9 @@
     }
 
     function gerarMensagem() {
-      const nome = document.getElementById('nomeStaff').value.trim() || 'Alexandre';
-      const inputData = document.getElementById('dataReuniao').value;
+      const nome = document.getElementById('nomeStaff').value.trim() || 'Nome';
+      const dataInicioVal = document.getElementById('dataInicio').value;
+      const dataFimVal = document.getElementById('dataFim').value;
 
       let mensagem = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure o ${nome}, para agendar um horário no PRIVADO, `;
 
@@ -134,11 +138,18 @@
       const amanha = new Date();
       amanha.setDate(hoje.getDate() + 1);
 
-      if (!inputData) {
+      if (!dataInicioVal && !dataFimVal) {
         mensagem += `na data de hoje ou amanhã (${formatarDataParaDDMM(hoje)} ou ${formatarDataParaDDMM(amanha)}).`;
-      } else {
-        const dataEscolhida = new Date(inputData);
-        mensagem += `na data de ${formatarDataParaDDMM(dataEscolhida)}.`;
+      } else if (dataInicioVal && dataFimVal) {
+        const inicio = new Date(dataInicioVal);
+        const fim = new Date(dataFimVal);
+        mensagem += `entre os dias ${formatarDataParaDDMM(inicio)} e ${formatarDataParaDDMM(fim)}.`;
+      } else if (dataInicioVal) {
+        const inicio = new Date(dataInicioVal);
+        mensagem += `no dia ${formatarDataParaDDMM(inicio)}.`;
+      } else if (dataFimVal) {
+        const fim = new Date(dataFimVal);
+        mensagem += `no dia ${formatarDataParaDDMM(fim)}.`;
       }
 
       mensagem += " Caso não corresponda à esta mensagem, uma punição entrará em vigor.";
