@@ -2,54 +2,110 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Página Inicial - CPXXP</title>
+  <title>cpx xp</title>
   <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      background-color: #121212;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f9f9f9;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      text-align: center;
     }
-    h1 {
-      color: #90caf9;
-      margin-bottom: 30px;
+    .logo {
+      font-size: 3rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .logo .dot {
+      font-size: 1.5rem;
+      color: #4fc3f7;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 25px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
     }
     nav a {
       color: #4fc3f7;
       text-decoration: none;
-      font-weight: bold;
-      margin: 0 15px;
-      font-size: 1.2rem;
+      transition: color 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      color: #82e0ff;
     }
-    footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #888;
+    .message {
+      font-size: 1.3rem;
+      max-width: 700px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 0 20px 30px;
+    }
+    .image-center {
+      width: 300px;
+      animation: pulse 2s infinite;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .footer {
+      font-size: 0.9em;
+      color: #aaa;
       text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+    .footer img {
+      margin-top: 10px;
+      width: 120px;
     }
   </style>
 </head>
 <body>
-  <h1>Bem-vindo ao CPXXP - Página Inicial</h1>
+  <div class="logo">
+    cpx xp <span class="dot">●</span>
+  </div>
+
   <nav>
-  <a href="/cpxxp/index.html">🏠 Início</a> |
-<a href="/cpxxp/entrevista/index.html">🎤 Entrevista</a> |
-<a href="/cpxxp/punicoes_trabalho/index.html">🛠️ Punições Trabalho</a> |
-<a href="/cpxxp/punicoes_nome/index.html">❌ Punições Nome</a> |
-<a href="/cpxxp/verificar_perfil/index.html">🔍 Verificar Perfil</a> |
-<a href="/cpxxp/reuniao_nome/index.html">📅 Marcar Troca de Nome</a>
+    <a href="/cpxxp/index.html">🏠 Início</a>
+    <a href="/cpxxp/entrevista/index.html">🎤 Entrevista</a>
+    <a href="/cpxxp/punicoes_trabalho/index.html">🛠️ Punições Trabalho</a>
+    <a href="/cpxxp/punicoes_nome/index.html">❌ Punições Nome</a>
+    <a href="/cpxxp/verificar_perfil/index.html">🔍 Verificar Perfil</a>
+    <a href="/cpxxp/reuniao_nome/index.html">📅 Marcar Troca de Nome</a>
   </nav>
-  <footer>
-    © 2025 - Feito com ❤ por <a href="https://jackymayers.github.io/" target="_blank" style="color:#4fc3f7;">Jacky Mayers</a>
-  </footer>
+
+  <div class="message">
+    Feito para organizar minha rotina, porque atenção não é meu superpoder (já que a mente viaja mais que eu).
+  </div>
+
+  <img src="https://i.postimg.cc/MG7qzW4x/emote.png" alt="Logo" class="image-center" />
+
+  <div class="footer">
+    <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Jacky Confuso" />
+    <p>© 2025 - Todos os direitos reservados. Feito com ❤, ajuda de IA e um pouquinho de preguiça por 
+      <a href="https://jackymayers.github.io/" target="_blank" style="color:#aaa;">Jacky Mayers</a>!
+    </p>
+  </div>
 </body>
 </html>
