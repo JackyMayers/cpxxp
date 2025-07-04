@@ -2,84 +2,84 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Gerador de Reunião - CPX</title>
-  <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcar Reunião</title>
+  <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #181818;
       color: #f9f9f9;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
-    header {
-      background-color: #252525;
-      padding: 15px 0;
-      text-align: center;
+    nav {
+      margin-bottom: 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
     }
-    header nav a {
-      color: #f9f9f9;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    header nav a:hover {
+    nav a {
       color: #4fc3f7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
     .container {
       max-width: 700px;
-      margin: 30px auto;
+      margin: auto;
       background-color: #252525;
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.4);
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
     label {
-      font-weight: 600;
-      margin-top: 10px;
       display: block;
+      margin-top: 12px;
+      font-weight: 600;
     }
-    input, button {
+    input[type="text"], input[type="date"] {
       width: 100%;
       padding: 10px;
       margin-top: 6px;
-      margin-bottom: 16px;
       border-radius: 8px;
       border: none;
       background-color: #333;
       color: #f9f9f9;
+      font-size: 1rem;
     }
     button.generate {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
       background-color: #3f51b5;
-      font-weight: bold;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
     button.generate:hover {
       background-color: #303f9f;
     }
     .output {
+      margin-top: 25px;
       background-color: #1f1f1f;
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 8px;
       white-space: pre-wrap;
-      margin-top: 20px;
       border: 1px solid #333;
+      min-height: 80px;
     }
     .footer {
       text-align: center;
+      margin-top: 40px;
       font-size: 0.9em;
       color: #aaa;
-      margin-top: 30px;
-      padding-bottom: 20px;
     }
     .footer img {
       margin-top: 10px;
@@ -88,27 +88,24 @@
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html">Início</a>
-      <a href="../entrevista/index.html">Entrevista</a>
-      <a href="../verificar_perfil/index.html">Verificar Perfil</a>
-      <a href="../servicos/index.html">Punição Serviços</a>
-      <a href="../reuniao/index.html">Reunião</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="../index.html">🏠 Início</a> |
+<a href="../entrevista/index.html">🎤 Entrevista</a> |
+<a href="../punicoes_trabalho/index.html">🛠️ Punições Trabalho</a> |
+<a href="../punicoes_nome/index.html">❌ Punições Nome</a> |
+<a href="../verificar_perfil/index.html">🔍 Verificar Perfil</a> |
+<a href="../reuniao_nome/index.html">📅 Marcar Troca de Nome</a>
+
+  </nav>
 
   <div class="container">
-    <h1>Gerador de Reunião</h1>
+    <h1>Marcar Reunião</h1>
 
-    <label for="staff">Nome do Staff</label>
-    <input type="text" id="staff" placeholder="Ex: Nome">
+    <label for="nomeStaff">Nome do administrador:</label>
+    <input type="text" id="nomeStaff" placeholder="Ex: Alexandre" />
 
-    <label for="data1">Data 1 (opcional)</label>
-    <input type="text" id="data1" placeholder="Ex: data, ou deixe em branco">
-
-    <label for="data2">Data 2 (opcional)</label>
-    <input type="text" id="data2" placeholder="Ex: data, ou deixe em branco">
+    <label for="dataReuniao">Data da reunião (opcional):</label>
+    <input type="date" id="dataReuniao" />
 
     <button class="generate" onclick="gerarMensagem()">Gerar Mensagem</button>
 
@@ -116,36 +113,39 @@
   </div>
 
   <div class="footer">
-    <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Jacky Confuso">
-    <p>© 2025 - Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank" style="color:#f9f9f9;">Jacky Mayers</a>!</p>
+    <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Jacky Confuso" />
+    <p>© 2025 - Todos os direitos reservados. Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank" style="color:#aaa;">Jacky Mayers</a>!</p>
   </div>
 
   <script>
-    function gerarMensagem() {
-      const staff = document.getElementById('staff').value.trim() || 'o(a) Staff';
-      const data1 = document.getElementById('data1').value.trim();
-      const data2 = document.getElementById('data2').value.trim();
+    function formatarDataParaDDMM(data) {
+      const dia = String(data.getDate()).padStart(2, '0');
+      const mes = String(data.getMonth() + 1).padStart(2, '0');
+      return `${dia}/${mes}`;
+    }
 
-      let hoje = new Date();
-      let amanha = new Date();
+    function gerarMensagem() {
+      const nome = document.getElementById('nomeStaff').value.trim() || 'Alexandre';
+      const inputData = document.getElementById('dataReuniao').value;
+
+      let mensagem = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure o ${nome}, para agendar um horário no PRIVADO, `;
+
+      const hoje = new Date();
+      const amanha = new Date();
       amanha.setDate(hoje.getDate() + 1);
 
-      const fHoje = hoje.toLocaleDateString('pt-BR');
-      const fAmanha = amanha.toLocaleDateString('pt-BR');
-
-      let textoData = '';
-
-      if (!data1 && !data2) {
-        textoData = `na data de hoje ou amanhã (${fHoje} ou ${fAmanha})`;
-      } else if (data1 && !data2) {
-        textoData = `na data de ${data1}`;
-      } else if (data1 && data2) {
-        textoData = `na data de ${data1} ou ${data2}`;
+      if (!inputData) {
+        // Se não digitou data, mostra hoje ou amanhã
+        mensagem += `na data de hoje ou amanhã (${formatarDataParaDDMM(hoje)} ou ${formatarDataParaDDMM(amanha)}).`;
+      } else {
+        // Se digitou data, formata e retorna só dd/mm
+        const dataEscolhida = new Date(inputData);
+        mensagem += `na data de ${formatarDataParaDDMM(dataEscolhida)}.`;
       }
 
-      const msg = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure o ${staff}, para agendar um horário no PRIVADO, ${textoData}. Caso não corresponda à esta mensagem, uma punição entrará em vigor.`;
+      mensagem += " Caso não corresponda à esta mensagem, uma punição entrará em vigor.";
 
-      document.getElementById('resultado').innerText = msg;
+      document.getElementById('resultado').innerText = mensagem;
     }
   </script>
 </body>
