@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerador de Reunião - CPX</title>
+  <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #181818;
+      color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #252525;
+      padding: 15px 0;
+      text-align: center;
+    }
+    header nav a {
+      color: #f9f9f9;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    header nav a:hover {
+      color: #4fc3f7;
+    }
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: #252525;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #333;
+      color: #f9f9f9;
+    }
+    button.generate {
+      background-color: #3f51b5;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button.generate:hover {
+      background-color: #303f9f;
+    }
+    .output {
+      background-color: #1f1f1f;
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      margin-top: 20px;
+      border: 1px solid #333;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 30px;
+      padding-bottom: 20px;
+    }
+    .footer img {
+      margin-top: 10px;
+      width: 120px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Início</a>
+      <a href="../entrevista/index.html">Entrevista</a>
+      <a href="../verificar_perfil/index.html">Verificar Perfil</a>
+      <a href="../servicos/index.html">Punição Serviços</a>
+      <a href="../reuniao/index.html">Reunião</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Gerador de Reunião</h1>
+
+    <label for="staff">Nome do Staff</label>
+    <input type="text" id="staff" placeholder="Ex: Nome">
+
+    <label for="data1">Data 1 (opcional)</label>
+    <input type="text" id="data1" placeholder="Ex: data, ou deixe em branco">
+
+    <label for="data2">Data 2 (opcional)</label>
+    <input type="text" id="data2" placeholder="Ex: data, ou deixe em branco">
+
+    <button class="generate" onclick="gerarMensagem()">Gerar Mensagem</button>
+
+    <div class="output" id="resultado"></div>
+  </div>
+
+  <div class="footer">
+    <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Jacky Confuso">
+    <p>© 2025 - Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank" style="color:#f9f9f9;">Jacky Mayers</a>!</p>
+  </div>
+
+  <script>
+    function gerarMensagem() {
+      const staff = document.getElementById('staff').value.trim() || 'o(a) Staff';
+      const data1 = document.getElementById('data1').value.trim();
+      const data2 = document.getElementById('data2').value.trim();
+
+      let hoje = new Date();
+      let amanha = new Date();
+      amanha.setDate(hoje.getDate() + 1);
+
+      const fHoje = hoje.toLocaleDateString('pt-BR');
+      const fAmanha = amanha.toLocaleDateString('pt-BR');
+
+      let textoData = '';
+
+      if (!data1 && !data2) {
+        textoData = `na data de hoje ou amanhã (${fHoje} ou ${fAmanha})`;
+      } else if (data1 && !data2) {
+        textoData = `na data de ${data1}`;
+      } else if (data1 && data2) {
+        textoData = `na data de ${data1} ou ${data2}`;
+      }
+
+      const msg = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure o ${staff}, para agendar um horário no PRIVADO, ${textoData}. Caso não corresponda à esta mensagem, uma punição entrará em vigor.`;
+
+      document.getElementById('resultado').innerText = msg;
+    }
+  </script>
+</body>
+</html>
