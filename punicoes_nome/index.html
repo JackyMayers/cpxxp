@@ -248,7 +248,6 @@
   </nav>
 <main>
   <div class="card">
-    <!-- Formulário -->
     <form class="painel-form" autocomplete="off" onsubmit="event.preventDefault(); generateReport();">
       <h1>Punição Nome Inadequado</h1>
       <div class="desc">
@@ -266,7 +265,6 @@
 
       <button type="submit">Gerar Relatório</button>
     </form>
-    <!-- Resultado -->
     <section class="painel-results">
       <div class="result-block">
         <div class="result-title">Informações da Punição</div>
@@ -291,6 +289,18 @@
     <p>© 2025 - Todos os direitos reservados. Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank">Jacky Mayers</a>!</p>
   </div>
   <script>
+    // Função para obter a saudação baseada na hora atual
+    function getSaudacao() {
+      const hora = new Date().getHours();
+      if (hora >= 5 && hora < 12) {
+        return "Bom dia";
+      } else if (hora >= 12 && hora < 18) {
+        return "Boa tarde";
+      } else {
+        return "Boa noite";
+      }
+    }
+
     function generateReport() {
       const discordId = document.getElementById('discordId').value.trim();
       const characterId = document.getElementById('characterId').value.trim();
@@ -301,6 +311,8 @@
         return;
       }
 
+      const saudacao = getSaudacao(); // Pega a saudação dinâmica
+
       // Info block
       let info = `**ID Discord:** ${discordId} | <@${discordId}>
 **ID do Personagem:** ${characterId}
@@ -308,18 +320,18 @@
 **Motivo:** Nome inadequado
 **Punição:** Remoção de AL`;
 
-      // Mensagem ID Discord
+      // Mensagem ID Discord (a saudação não se aplica a este bloco, pois é um resumo de ID)
       let idmsg = `${discordId} | <@${discordId}> - ${characterId} ${characterName} - Remoção de AL - Nome inadequado.`;
 
       // Mensagem block (longa)
-      let msg = `Boa Noite! Sua Allowlist está sendo removida pelo seguinte motivo: (Nome inadequado). Durante o alinhamento, é informado que o nome deve ser registrável em cartório. Nomes com duplo sentido, apelidos, diminutivos (como Joãozinho, Paulinha), nomes inventados ou com símbolos, repetições de letras ou números fora do padrão não são permitidos. Exemplo de um nome correto com as iniciais maiúsculas (ex: João Silva). Lembrando que o nome deve conter UM nome e até TRÊS sobrenomes. Caso deseje retornar ao servidor, será necessário refazer o processo de Allowlist com um nome válido.
-
+      let msg = `${saudacao}! Sua Allowlist está sendo removida pelo seguinte motivo: (Nome inadequado). Durante o alinhamento, é informado que o nome deve ser registrável em cartório. Nomes com duplo sentido, apelidos, diminutivos (como Joãozinho, Paulinha), nomes inventados ou com símbolos, repetições de letras ou números fora do padrão não são permitidos. Exemplo de um nome correto com as iniciais maiúsculas (ex: João Silva). Lembrando que o nome deve conter UM nome e até TRÊS sobrenomes. Caso deseje retornar ao servidor, será necessário refazer o processo de Allowlist com um nome válido.
 Atenciosamente, Equipe de Allowlist – Suporte CPX.XP!`;
 
       document.getElementById("infoBlock").textContent = info;
       document.getElementById("idMsgBlock").textContent = idmsg;
       document.getElementById("msgBlock").textContent = msg;
     }
+
     function copyContent(id) {
       const texto = document.getElementById(id).textContent;
       const temp = document.createElement('textarea');
