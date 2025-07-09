@@ -227,7 +227,6 @@
   </nav>
 <main>
   <div class="card">
-    <!-- Formulário -->
     <form class="painel-form" autocomplete="off" onsubmit="event.preventDefault(); gerarMensagem();">
       <h1>Marcar Reunião</h1>
       <div class="desc">
@@ -248,7 +247,6 @@
       <input type="date" id="dataFim" />
       <button type="submit">Gerar Mensagem</button>
     </form>
-    <!-- Saída -->
     <section class="painel-output">
       <h2>Mensagem Pronta</h2>
       <div class="output-label">Mensagem de Reunião</div>
@@ -262,6 +260,18 @@
     <p>© 2025 - Todos os direitos reservados. Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank" style="color:#aaa;">Jacky Mayers</a>!</p>
   </div>
   <script>
+    // Função para obter a saudação baseada na hora atual
+    function getSaudacao() {
+      const hora = new Date().getHours();
+      if (hora >= 5 && hora < 12) {
+        return "Bom dia";
+      } else if (hora >= 12 && hora < 18) {
+        return "Boa tarde";
+      } else {
+        return "Boa noite";
+      }
+    }
+
     function formatarDataParaDDMM(data) {
       const dia = String(data.getDate()).padStart(2, '0');
       const mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -273,9 +283,10 @@
       const nome = document.getElementById('nomeStaff').value.trim() || 'Nome';
       const dataInicioVal = document.getElementById('dataInicio').value;
       const dataFimVal = document.getElementById('dataFim').value;
+      
+      const saudacao = getSaudacao(); // Pega a saudação dinâmica (Bom dia, Boa tarde, Boa noite)
 
-      let mensagem = `Boa tarde, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nome}, para agendar um horário no PRIVADO, `;
-
+      let mensagem = `${saudacao}, você está sendo convidado(a) a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nome}, para agendar um horário no PRIVADO, `;
       const hoje = new Date();
       const amanha = new Date();
       amanha.setDate(hoje.getDate() + 1);
@@ -293,9 +304,8 @@
         const fim = new Date(dataFimVal + "T00:00:00");
         mensagem += `no dia ${formatarDataParaDDMM(fim)}.`;
       }
-
+      
       mensagem += " Caso não corresponda à esta mensagem, uma punição entrará em vigor.";
-
       document.getElementById('resultado').innerText = mensagem;
     }
 
