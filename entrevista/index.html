@@ -515,7 +515,7 @@
         return;
       }
       if (status === 'aprovado') {
-        const resultado = `**Nome do Aprovado (IRL):** ${nome}\n**Data de Nascimento:** ${data} (${idade})\n**ID Discord:** ${discord} |<@${discord}>\n**Número da Entrevista:** ${entrevista}\n**Rumo:** ${rumo}\n${observacoes ? '**Observações:** ' + observacoes : ''}`;
+        const resultado = `**Nome do Aprovado (IRL):** ${nome}\n**Data de Nascimento:** ${data} (${idade} anos)\n**ID Discord:** ${discord} |<@${discord}>\n**Número da Entrevista:** ${entrevista}\n**Rumo:** ${rumo}\n${observacoes ? '**Observações:** ' + observacoes : ''}`;
         const resultadoAprovados = document.getElementById('resultadoAprovados');
         resultadoAprovados.value += (resultadoAprovados.value.trim() ? '\n\n' : '') + resultado;
         localStorage.setItem('resultadoAprovados', resultadoAprovados.value);
