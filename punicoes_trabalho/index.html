@@ -189,7 +189,6 @@
         }
     }
 
-
     .inline-group {
       display: flex;
       gap: 10px;
@@ -405,22 +404,18 @@
       <div class="desc">
         Gere relatórios de advertências para profissões do servidor. <span style="color:var(--cor-sec);font-weight:600;">Preencha os campos</span> ao lado e veja o texto pronto ao lado direito!
       </div>
-
       <div class="input-group">
         <label for="nomePersonagem">Nome do Personagem <span class="tooltip">ⓘ<span class="tooltiptext">Nome completo do personagem no jogo.</span></span></label>
         <input type="text" id="nomePersonagem" placeholder="Ex: John Doe" autocomplete="off" maxlength="50" />
       </div>
-
       <div class="input-group">
         <label for="id">ID do personagem <span class="tooltip">ⓘ<span class="tooltiptext">ID numérico do personagem no jogo.</span></span></label>
         <input type="text" id="id" placeholder="Ex: 123" autocomplete="off" maxlength="12" />
       </div>
-
       <div class="input-group">
         <label for="idDiscord">ID Discord <span class="tooltip">ⓘ<span class="tooltiptext">ID numérico do Discord. Use o botão direito no Discord > Copiar ID.</span></span></label>
         <input type="text" id="idDiscord" placeholder="Ex: 987654321" autocomplete="off" maxlength="24" />
       </div>
-
       <label for="profissao">Profissão <span class="tooltip">ⓘ<span class="tooltiptext">Selecione a profissão do personagem que será advertido.</span></span></label>
       <select id="profissao" onchange="mostrarOpcoesAdicionais()">
         <option value="Faxineiro">Faxineiro</option>
@@ -513,10 +508,12 @@
       document.getElementById('opcoesCacador').classList.toggle('hidden', prof !== 'Caçador');
       atualizarAdvertencia();
     }
+
     function mostrarCamposTipo2() {
       const tipo = document.getElementById('tipoAdvertencia').value;
       document.getElementById('dadosAdvertencia2').classList.toggle('hidden', tipo !== '2');
     }
+
     function atualizarAdvertencia() {
       const prof = document.getElementById('profissao').value;
       let motivo = 'Roupa inadequada';
@@ -532,6 +529,7 @@
       }
       document.getElementById('info').setAttribute('data-motivoResumo', motivo);
     }
+
     function copiarPre(id) {
       const texto = document.getElementById(id).innerText;
       const tempTextarea = document.createElement('textarea');
@@ -542,12 +540,15 @@
       document.body.removeChild(tempTextarea);
       alert('Copiado!');
     }
+
     function copiarInfo() {
       copiarPre('info');
     }
+
     function copiarMensagem() {
       copiarPre('mensagem');
     }
+
     function limparCampos() {
       document.getElementById('nomePersonagem').value = '';
       document.getElementById('id').value = '';
@@ -566,6 +567,7 @@
       document.getElementById('mensagem').innerText = '';
       document.getElementById('dadosAdvertencia2').classList.add('hidden');
     }
+
     function gerarRelatorio() {
       const nomePersonagem = document.getElementById('nomePersonagem').value;
       const id = document.getElementById('id').value;
@@ -595,19 +597,28 @@
           RoupaArma: '(Caçador: roupas fechadas (calças e camisas manga longa), luvas, sapatos e rifle de caça).'
         }
       };
+
       let detalhe = detalhes[prof];
       if (typeof detalhe === 'object') {
         detalhe = detalhes[prof === 'Lixeiro' ? document.getElementById('opcaoLixeiro').value : document.getElementById('opcaoCacador').value];
       }
-      // Info
-      let info = `**ID:** ${id}${nomePersonagem ? ' - ' + nomePersonagem : ''}
-**ID Discord:** ${discord} | <@${discord}>
-**Profissão:** ${prof}
-**Motivo da Advertência:** ${motivo} para realizar o trabalho de ${prof.toLowerCase()}
-**Status:** Advertência
-**Provas:**`;
 
-      // Mensagem
+      // Info - MANTER O MOTIVO AQUI
+      let info = `**ID:** ${id}${nomePersonagem ? ' - ' + nomePersonagem : ''}\n` +
+                 `**ID Discord:** ${discord} | <@${discord}>\n` +
+                 `**Profissão:** ${prof}\n`;
+
+      if (tipo === '1') {
+          info += `**Motivo da Advertência:** ${motivo} para realizar o trabalho de ${prof.toLowerCase()}\n` +
+                  `**Status:** Advertência 1\n`;
+      } else { // tipo === '2'
+          info += `**Motivo da Advertência:** ${motivo} para realizar o trabalho de ${prof.toLowerCase()}\n` + // Revertido para incluir o motivo
+                  `**Status:** Advertência 2\n`;
+      }
+      info += `**Provas:**`;
+
+
+      // Mensagem - REMOVER O MOTIVO APENAS AQUI PARA O TIPO 2
       let mensagem = "";
       if (tipo === '1') {
         if (prof === 'Lixeiro') {
@@ -637,16 +648,19 @@
         }
       } else {
         const dataTexto = montarTextoData(data1Input, data2Input);
-        mensagem = `${saudacao}, você está sendo convidado/a a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nomeStaff}, para agendar um horário no PRIVADO, ${dataTexto}. Motivo: ${motivo} para realizar o trabalho de ${prof.toLowerCase()}`;
+        // AQUI ESTÁ A MUDANÇA SOLICITADA: REMOVIDO O MOTIVO DA MENSAGEM DA ADVERTÊNCIA 2.
+        mensagem = `${saudacao}, você está sendo convidado/a a participar de uma reunião com a Equipe de Suporte. Procure ${tratamento} ${nomeStaff}, para agendar um horário no PRIVADO, ${dataTexto}.`;
       }
       document.getElementById('info').setAttribute('data-motivoResumo', motivo);
       document.getElementById('info').innerText = info;
       document.getElementById('mensagem').innerText = mensagem;
     }
+
     function normalizarDataBr(str) {
       const soNumeros = str.replace(/[^\d]/g, '');
       const hoje = new Date();
       const anoAtual = hoje.getFullYear();
+
       if (soNumeros.length === 4) {
         return new Date(`${anoAtual}-${soNumeros.slice(2, 4)}-${soNumeros.slice(0, 2)}T00:00:00`);
       }
@@ -655,27 +669,36 @@
       }
       return null;
     }
+
     function montarTextoData(d1, d2) {
       const hoje = new Date();
       const amanha = new Date();
       amanha.setDate(hoje.getDate() + 1);
+
       const data1 = normalizarDataBr(d1);
       const data2 = normalizarDataBr(d2);
+
       const f1 = data1?.toLocaleDateString('pt-BR');
       const f2 = data2?.toLocaleDateString('pt-BR');
+
       if (!data1 || isNaN(data1)) return 'data inválida';
+
       let texto = '';
       const hojeF = hoje.toLocaleDateString('pt-BR');
       const amanhaF = amanha.toLocaleDateString('pt-BR');
+
       if (f1 === hojeF) texto += `na data de hoje (${f1})`;
       else if (f1 === amanhaF) texto += `na data de amanhã (${f1})`;
       else texto += `na data de (${f1})`;
+
       if (data2 && !isNaN(data2)) {
         if (f2 === amanhaF) texto += ` ou amanhã (${f2})`;
         else texto += ` ou (${f2})`;
       }
       return texto;
     }
+
+    // Initialize on page load
     mostrarOpcoesAdicionais();
   </script>
 </body>
