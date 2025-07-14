@@ -110,7 +110,6 @@
                 font-size: 1.4em;
             }
         }
-
         .painel-form {
             flex: 1 1 0;
             min-width: 280px;
@@ -127,7 +126,6 @@
             font-size: 1em;
             margin-bottom: 15px;
         }
-
         /* Melhorias para alinhamento e espaçamento dos campos */
         label {
             display: block; /* Garante que a label ocupe toda a largura e o input vá para a próxima linha */
@@ -143,7 +141,6 @@
             margin-top: 0; /* Ajusta a margem para a label do select */
             margin-bottom: 5px;
         }
-
         input[type="text"], input[type="date"], input[type="time"], textarea, select {
             padding: 11px 12px;
             font-size: 1.02em;
@@ -197,7 +194,6 @@
             background: linear-gradient(90deg, var(--accent2) 10%, var(--accent) 100%);
             color: #1a1a1a;
         }
-
         /* Estilo para campos lado a lado (ID e Nome) */
         .input-group-inline {
             display: flex;
@@ -218,7 +214,6 @@
         .input-group-inline input {
             margin-bottom: 0; /* Remove margem inferior extra para inputs dentro de grupos */
         }
-        
         /* Estilo para o checkbox e sua label */
         .checkbox-container {
             display: flex;
@@ -248,7 +243,6 @@
             color: var(--text);
             cursor: pointer;
         }
-
 
         .painel-output {
             flex: 2.1 1 0;
@@ -379,6 +373,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="formFieldsContainer">
                     <div id="fields_ausenciasSuporte" class="form-section hidden">
                         <div class="input-group-inline">
@@ -453,7 +448,7 @@
                         <input type="text" id="loja_idTransacao" placeholder="Ex: #ABCDE12345">
 
                         <label for="loja_comprovante">Comprovante:</label>
-                        <input type="text" id="loja_comprovante" placeholder="URL do link do print do comprovante">
+                        <input type="text" id="loja_comprovante" placeholder="URL do link do comprovante">
                     </div>
 
                     <div id="fields_trocaSteam" class="form-section hidden">
@@ -586,10 +581,9 @@
 
             if (checkbox.checked) {
                 ocorrenciaFieldsDiv.classList.remove('hidden');
-                
+
                 // Preencher automaticamente
                 tituloInput.value = 'Ocorrência';
-                
                 const now = new Date();
                 const year = now.getFullYear();
                 const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -640,7 +634,7 @@
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
                 }
-                
+
                 // Lógica específica: Mostrar Ocorrência APENAS para 'multaVeiculoAbandonado'
                 if (selectedType === 'multaVeiculoAbandonado') {
                     addOcorrenciaCheckboxContainer.classList.remove('hidden'); // Mostra o checkbox
@@ -682,8 +676,7 @@
                     fields.tempo = getFieldValue('ausencias_tempo');
                     fields.provas = getFieldValue('ausencias_provas');
 
-                    relatorio = `** AUSÊNCIAS SUPORTE**\n`;
-                    relatorio += `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
+                    relatorio = `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
                     relatorio += `** ID Discord:** ${fields.idDiscord}\n`;
                     relatorio += `** Tempo:** ${fields.tempo}\n`;
                     relatorio += `** Provas:** ${fields.provas}`;
@@ -696,8 +689,7 @@
                     fields.motivoAusencia = getFieldValue('revogacao_motivoAusencia');
                     fields.motivoAprovacaoReprovacao = getFieldValue('revogacao_motivoAprovacaoReprovacao');
 
-                    relatorio = `** REVOGAÇÃO/REATIVAÇÃO**\n`;
-                    relatorio += `** Nome/Discord:** ${fields.nomeDiscord}\n`;
+                    relatorio = `** Nome/Discord:** ${fields.nomeDiscord}\n`;
                     relatorio += `** ID Discord:** ${fields.idDiscord}\n`;
                     relatorio += `** Status:** ${fields.status}\n`;
                     relatorio += `** Motivo da Ausência:** ${fields.motivoAusencia}\n\n`;
@@ -714,8 +706,7 @@
                     fields.idTransacao = getFieldValue('loja_idTransacao');
                     fields.comprovante = getFieldValue('loja_comprovante');
 
-                    relatorio = `** LOJA VIP/TEBEX**\n`;
-                    relatorio += `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
+                    relatorio = `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
                     relatorio += `** ID Discord:** ${fields.idDiscord}\n`;
                     relatorio += `** Nome Completo:** ${fields.nomeCompleto}\n`;
                     relatorio += `** E-mail:** ${fields.email}\n`;
@@ -732,8 +723,7 @@
                     fields.nomePersonagem = getFieldValue('steam_nomePersonagem');
                     fields.motivo = getFieldValue('steam_motivo');
 
-                    relatorio = `** TROCA DE STEAM**\n`;
-                    relatorio += `** ID Discord:** ${fields.idDiscord}\n`;
+                    relatorio = `** ID Discord:** ${fields.idDiscord}\n`;
                     relatorio += `** Steam Antiga:** ${fields.steamAntiga}\n`;
                     relatorio += `** Steam Nova:** ${fields.steamNova}\n`;
                     relatorio += `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
@@ -748,9 +738,8 @@
                     fields.nomePersonagem = getFieldValue('discord_nomePersonagem');
                     fields.motivo = getFieldValue('discord_motivo');
 
-                    relatorio = `** TROCA DE DISCORD**\n`;
-                    relatorio += `** Discord Antigo:** ${fields.idDiscordAntigo}\n`;
-                    relatorio += `** ID Discord Novo:** ${fields.idDiscordNovo}\n`;
+                    relatorio = `** Discord ID Antigo:** ${fields.idDiscordAntigo}\n`;
+                    relatorio += `** Discord ID Novo:** ${fields.idDiscordNovo}\n`;
                     relatorio += `** Steam HEX:** ${fields.steamHex}\n`;
                     relatorio += `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
                     relatorio += `** Motivo:** ${fields.motivo}`;
@@ -764,8 +753,7 @@
                     fields.tempo = getFieldValue('banimento_tempo');
                     fields.provas = getFieldValue('banimento_provas');
 
-                    relatorio = `** BANIMENTO SUPORTE**\n`;
-                    relatorio += `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
+                    relatorio = `** ID e Nome do Personagem:** ${fields.idPersonagem} - ${fields.nomePersonagem}\n`;
                     relatorio += `** ID Discord:** ${fields.idDiscord}\n`;
                     relatorio += `** Motivo:** ${fields.motivo}\n`;
                     relatorio += `** Tempo:** ${fields.tempo}\n`;
@@ -773,58 +761,70 @@
                     break;
 
                 case 'multaVeiculoAbandonado':
-                    let ocorrenciaHeader = "";
-                    const addOcorrenciaCheckbox = document.getElementById('addOcorrenciaInfo');
-
-                    // Apenas se o checkbox de ocorrência estiver marcado (que será automaticamente quando 'Multa' for selecionado)
-                    if (addOcorrenciaCheckbox.checked) {
-                        const tituloOcorrencia = getFieldValue('ocorrencia_titulo');
-                        const dataOcorrencia = getFieldValue('ocorrencia_data');
-                        const horaOcorrencia = getFieldValue('ocorrencia_hora');
-                        const dataFormatadaOcorrencia = dataOcorrencia ? new Date(dataOcorrencia + 'T00:00:00').toLocaleDateString('pt-BR') : 'N/A';
-
-                        ocorrenciaHeader += `** Ocorrência:** ${tituloOcorrencia || 'N/A'}\n`;
-                        ocorrenciaHeader += `** Data:** ${dataFormatadaOcorrencia}\n`;
-                        ocorrenciaHeader += `** Hora:** ${horaOcorrencia || 'N/A'}\n\n`;
-                    }
-
+                    // Obter todos os campos relevantes para este relatório
                     fields.tipoVeiculo = getFieldValue('multa_tipoVeiculo');
                     fields.localInfracao = getFieldValue('multa_localInfracao');
                     fields.nomeProprietario = getFieldValue('multa_nomeProprietario');
                     fields.idProprietario = getFieldValue('multa_idProprietario');
                     fields.valorMulta = getFieldValue('multa_valorMulta');
 
-                    relatorio = ocorrenciaHeader; // Começa com as informações da ocorrência (se marcada)
-                    relatorio += `Foi localizado ${fields.tipoVeiculo} ${fields.localInfracao}.\n`;
-                    relatorio += `Proprietário identificado: ${fields.nomeProprietario} - ID ${fields.idProprietario}\n`;
-                    relatorio += `Diante da infração, foi registrada a acusação de veículo abandonado, com aplicação de multa no valor de R$ ${fields.valorMulta}.`;
+                    // Obter os campos da ocorrência
+                    const tituloOcorrencia = getFieldValue('ocorrencia_titulo');
+                    const dataOcorrencia = getFieldValue('ocorrencia_data');
+                    const horaOcorrencia = getFieldValue('ocorrencia_hora');
+
+                    // Construir a string do relatório exatamente como você quer
+                    if (tituloOcorrencia) relatorio += `** Ocorrência:** ${tituloOcorrencia}\n`;
+                    if (dataOcorrencia) relatorio += `** Data:** ${dataOcorrencia.split('-').reverse().join('/')}\n`;
+                    if (horaOcorrencia) relatorio += `** Hora:** ${horaOcorrencia}\n\n`;
+
+                    relatorio += `Foi localizado ${fields.tipoVeiculo} ${fields.localInfracao}. \n`;
+                    relatorio += `Proprietário identificado: ${fields.nomeProprietario} - ID ${fields.idProprietario} \n`;
+                    relatorio += `Diante da infração, foi registrada a acusação de veículo abandonado, com aplicação de multa no valor de R$ ${fields.valorMulta} .`;
                     break;
 
                 default:
-                    relatorio = "Por favor, selecione um tipo de relatório válido.";
+                    relatorio = "Selecione um tipo de relatório e preencha os campos.";
                     break;
             }
 
-            document.getElementById('relatorioGerado').innerHTML = relatorio;
+            document.getElementById('relatorioGerado').textContent = relatorio;
         }
 
         function copiarRelatorio() {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = document.getElementById('relatorioGerado').innerHTML;
-            const textoPuro = tempDiv.textContent || tempDiv.innerText;
+            const relatorioGerado = document.getElementById('relatorioGerado');
+            const textoParaCopiar = relatorioGerado.textContent;
 
-            if (!textoPuro || textoPuro.trim() === "Selecione um tipo de relatório e preencha os campos." || textoPuro.trim() === "Selecione um tipo de relatório para começar." || textoPuro.trim() === "Por favor, selecione um tipo de relatório válido.") {
-                alert('Nada para copiar! Gere o relatório primeiro.');
-                return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textoParaCopiar)
+                    .then(() => {
+                        alert("Relatório copiado para a área de transferência!");
+                    })
+                    .catch(err => {
+                        console.error('Erro ao copiar: ', err);
+                        fallbackCopyTextToClipboard(textoParaCopiar);
+                    });
+            } else {
+                fallbackCopyTextToClipboard(textoParaCopiar);
             }
+        }
 
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = textoPuro;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
-            alert('Relatório copiado para a área de transferência!');
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; // Evita rolagem para o final
+            textArea.style.left = "-9999px"; // Fora da tela
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'bem-sucedida' : 'falhou';
+                alert('Cópia ' + msg + ' (fallback)');
+            } catch (err) {
+                console.error('Fallback: Erro ao copiar texto: ', err);
+            }
+            document.body.removeChild(textArea);
         }
     </script>
 </body>
